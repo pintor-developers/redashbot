@@ -16,7 +16,6 @@ export const handleHelp: Middleware<SlackEventMiddlewareArgs<
 export const handleRecordChart: Handler = ({ redash, capture }) => {
   return async ({ context, say, client, message }) => {
     const [originalUrl, queryId, visualizationId]: string[] = context.matches
-    await say(`Taking screenshot of ${originalUrl}`)
 
     const query = await redash.getQuery(queryId)
     const visualization = query.visualizations.find(
@@ -38,7 +37,6 @@ export const handleRecordChart: Handler = ({ redash, capture }) => {
 export const handleRecordDashboard: Handler = ({ redash, capture }) => {
   return async ({ client, context, say, message }) => {
     const [originalUrl, dashboardId]: string[] = context.matches
-    await say(`Taking screenshot of ${originalUrl}`)
 
     const dashboard = await redash.getDashboard(dashboardId)
     const filename = `${dashboard.name}-dashboard-${dashboardId}.png`
