@@ -8,7 +8,12 @@ export async function capture(url: string): Promise<Buffer> {
   const browser = await engine.launch({
     args: ['--disable-dev-shm-usage', '--no-sandbox'],
   })
-  const page = await browser.newPage()
+
+  const context = await browser.newContext({
+    locale: 'ja'
+  });
+  const page = await context.newPage();
+
   page.setViewportSize({ width: 1024, height: 360 })
   await page.goto(url)
   try {
